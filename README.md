@@ -41,13 +41,14 @@ O objetivo é demonstrar a aplicação prática de conhecimentos de desenvolvime
 Expedição Interdiciplinar Site/
 
 ├── index.html # Arquivo principal
+
 ├── images/
 
 
 ## Como Visualizar
 
 O projeto está disponível online através do GitHub Pages:
-**[Link do projeto publicado]**
+**(https://github.com/LuhLuh10/canada.git)**
 
 Para executar localmente:
 1. Faça o download dos arquivos
