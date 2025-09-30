@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expedição Interdisciplinar - Canadá</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset e configurações básicas */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --primary: #FF0000; /* Vermelho da bandeira canadense */
+      --secondary: #FFFFFF; /* Branco */
+      --accent: #FFCC00; /* Dourado */
+      --dark: #0A2463; /* Azul escuro */
+      --light: #F5F5F5;
+      --text: #333333;
+      --nav-bg: rgba(10, 36, 99, 0.95);
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--light);
+      overflow-x: hidden;
+    }
+    
+    /* Cabeçalho */
+    header {
+      background: linear-gradient(135deg, var(--dark), #1a3a8f);
+      color: var(--secondary);
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+    }
+    
+    /* Menu Hamburguer */
+    .menuButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 13%;
+      color: #090909;
+      width: 3.5em;
+      height: 3.5em;
+      border-radius: 0.5em;
+      background: #171717;
+      border: 1px solid #171717;
+      transition: all .3s;
+      box-shadow: inset 4px 4px 12px #3a3a3a,
+                 inset -4px -4px 12px #000000;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    
+    .menuButton:hover {
+      border: 1px solid black;
+    }
+    
+    .menuButton:active {
+      color: #666;
+      box-shadow: 6px 6px 12px #3a3a3a,
+                 -6px -6px 12px #000000;
+    }
+    
+    input[type = "checkbox"] {
+      -webkit-appearance: none;
+      display: none;
+      visibility: hidden;
+    }
+    
+    .menuButton span {
+      width: 30px;
+      height: 4px;
+      background: rgb(200,200,200);
+      border-radius: 100px;
+      transition: 0.3s ease;
+    }
+    
+    input[type]:checked ~ span.top {
+      transform: translateY(290%)rotate(45deg);
+      width: 40px;
+    }
+    
+    input[type]:checked ~ span.bot {
+      transform: translateY(-270%) rotate(-45deg);
+      width: 40px;
+      box-shadow: 0 0 10px #495057;
+    }
+    
+    input[type]:checked ~ span.mid {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    
+    /* Menu de navegação */
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 300px;
+      height: 100vh;
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      transition: right 0.5s ease;
+      z-index: 999;
+      padding: 100px 20px 20px;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    #check:checked ~ .nav-menu {
+      right: 0;
+    }
+    
+    .nav-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .nav-menu a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-size: 1.2rem;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-menu a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+    
+    .nav-menu a i {
+      width: 25px;
+      text-align: center;
+    }
+    
+    /* Seções principais */
+    section {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: var(--secondary);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    section:hover {
+      transform: translateY(-5px);
+    }
+    
+    h2 {
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--accent);
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    
+    /* Imagens */
+    .section-image {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 8px;
+      margin: 1.5rem auto;
+      display: block;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Cards para disciplinas */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .card {
+      background-color: var(--light);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .card h3 {
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Botões */
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: var(--secondary);
+      padding: 0.7rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background-color: #cc0000;
+      transform: translateY(-2px);
+    }
+    
+    /* Quiz */
+    .quiz-container {
+      background-color: var(--light);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+    }
+    
+    .quiz-question {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .quiz-option {
+      padding: 0.7rem;
+      background-color: var(--secondary);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .quiz-option:hover {
+      background-color: #e9e9e9;
+    }
+    
+    /* Linha do tempo */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+    
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--primary);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+    
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+    
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+    
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+    
+    .timeline-content {
+      padding: 20px;
+      background-color: var(--light);
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Rodapé */
+    footer {
+      background-color: var(--dark);
+      color: var(--secondary);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .header-content {
+        padding: 0 1rem;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      section {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+      
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      
+      .timeline-item:nth-child(even) {
+        left: 0;
+      }
+      
+      .nav-menu {
+        width: 100%;
+      }
+    }
+    
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+  </style>
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="header-content">
+      <h1><i class="fas fa-maple-leaf"></i> Expedição Interdisciplinar: Canadá</h1>
+      
+    </div>
+  </header>
+
+  <!-- Introdução -->
+  <section id="introducao" class="fade-in">
+    <h2><i class="fas fa-flag"></i> Introdução</h2>
+    <p>O Canadá é um país fascinante localizado na América do Norte, conhecido por sua vasta extensão territorial, diversidade cultural e paisagens naturais impressionantes. Nesta expedição interdisciplinar, exploraremos o Canadá sob diferentes perspectivas do conhecimento, conectando cada disciplina escolar com aspectos únicos deste país multicultural.</p>
+    
+    <div class="card-container">
+      <div class="card fade-in delay-1">
+        <h3><i class="fas fa-landmark"></i> Diversidade Cultural</h3>
+        <p>Com duas línguas oficiais (inglês e francês) e uma rica herança indígena, o Canadá é um exemplo de multiculturalismo.</p>
+      </div>
+      <div class="card fade-in delay-2">
+        <h3><i class="fas fa-tree"></i> Beleza Natural</h3>
+        <p>Das Montanhas Rochosas às Cataratas do Niágara, o Canadá oferece paisagens deslumbrantes em todas as estações.</p>
+      </div>
+      <div class="card fade-in delay-3">
+        <h3><i class="fas fa-gem"></i> Qualidade de Vida</h3>
+        <p>Reconhecido por sua alta qualidade de vida, sistema de saúde público e educação de excelência.</p>
+      </div>
+    </div>
+    
+    <img src="Imagens/canada1.avif" alt="Paisagem do Canadá com montanhas" class="section-image">
+  </section>
+
+  <!-- Geografia -->
+  <section id="geografia" class="fade-in">
+    <h2><i class="fas fa-globe-americas"></i> Geografia</h2>
+    <p>O Canadá é o segundo maior país do mundo em área territorial, estendendo-se do Oceano Atlântico ao Pacífico e ao norte até o Oceano Ártico. Sua geografia diversificada inclui vastas florestas, montanhas imponentes, lagos cristalinos e a tundra ártica.</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-mountain"></i> Relevo</h3>
+        <p>As Montanhas Rochosas dominam o oeste, enquanto as planícies centrais e os Escudos Canadenses caracterizam o centro e leste do país.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-temperature-low"></i> Clima</h3>
+        <p>Variado, com invernos rigorosos no norte e verões amenos no sul. O país experimenta as quatro estações bem definidas.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-water"></i> Recursos Hídricos</h3>
+        <p>Possui mais lagos que qualquer outro país, incluindo os Grandes Lagos (compartilhados com os EUA) e inúmeros rios importantes.</p>
+      </div>
+    </div>
+    
+    <img src="Imagens/barco1.avif" alt="Mapa do Canadá" class="section-image">
+    <a href="https://www.google.com/maps/place/Canadá" target="_blank" class="btn">Ver no Google Maps</a>
+  </section>
+
+  <!-- História -->
+  <section id="historia" class="fade-in">
+    <h2><i class="fas fa-scroll"></i> História</h2>
+    <p>A história do Canadá é marcada pela presença milenar dos povos indígenas, seguida pela colonização francesa e britânica, e finalmente pela formação de uma nação independente que valoriza a diversidade e o multiculturalismo.</p>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Povos Indígenas (até século XVI)</h3>
+          <p>Primeiras Nações, Inuit e Métis habitavam o território há milhares de anos antes da chegada dos europeus.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Colonização Francesa (séculos XVI-XVIII)</h3>
+          <p>Jacques Cartier chegou em 1534, estabelecendo a Nova França com foco no comércio de peles.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Domínio Britânico (1763-1867)</h3>
+          <p>Após a Guerra dos Sete Anos, a França cedeu a Nova França à Grã-Bretanha.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Confederação (1867)</h3>
+          <p>O Canadá tornou-se um domínio autônomo dentro do Império Britânico com a Confederação de 1867.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Português -->
+  <section id="portugues" class="fade-in">
+    <h2><i class="fas fa-book"></i> Português</h2>
+    <p>Texto descritivo: "O Canadá é uma tapeçaria de paisagens e culturas entrelaçadas. Nas vibrantes cidades de Toronto e Vancouver, arranha-céus modernos se erguem ao lado de bairros históricos. Enquanto isso, nas vastas regiões selvagens, ursos polares vagam pela tundra ártica e alces majestosos percorrem florestas infinitas. No outono, as florestas se transformam em um espetáculo de cores, com tons vibrantes de vermelho, laranja e amarelo. O inverno cobre o país com um manto branco, transformando-o em um paraíso para esportes de neve e atividades ao ar livre."</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-pen-fancy"></i> Literatura Canadense</h3>
+        <p>Autores como Margaret Atwood, Alice Munro e Yann Martel oferecem visões profundas da identidade canadense.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-microphone-alt"></i> Línguas Oficiais</h3>
+        <p>Inglês e francês são as línguas oficiais, com o bilinguismo sendo uma característica distintiva do país.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Matemática -->
+  <section id="matematica" class="fade-in">
+    <h2><i class="fas fa-calculator"></i> Matemática</h2>
+    <p>O Canadá tem uma população de aproximadamente 38 milhões de habitantes distribuídos em uma área de 9,98 milhões de km², resultando em uma das densidades demográficas mais baixas do mundo (cerca de 4 hab/km²).</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-chart-line"></i> Estatísticas</h3>
+        <p>Expectativa de vida: 82,5 anos. Taxa de natalidade: 1,47 filhos por mulher. PIB per capita: US$ 51.000.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-users"></i> Distribuição Populacional</h3>
+        <p>Mais de 80% dos canadenses vivem a menos de 150 km da fronteira com os EUA, concentrando-se nas áreas urbanas.</p>
+      </div>
+    </div>
+    
+    <!-- Gráfico de distribuição populacional -->
+    <div class="chart-container">
+      <h3>Distribuição Populacional por Província/Território</h3>
+      <div class="chart">
+        <div class="chart-bars">
+          <div class="bar-container">
+            <div class="bar-label">Ontário</div>
+            <div class="bar" data-value="38.9" style="width: 0%" data-color="#d9534f"></div>
+            <div class="bar-value">38.9%</div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-label">Quebec</div>
+            <div class="bar" data-value="22.6" style="width: 0%" data-color="#5bc0de"></div>
+            <div class="bar-value">22.6%</div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-label">Colúmbia Brit.</div>
+            <div class="bar" data-value="13.7" style="width: 0%" data-color="#5cb85c"></div>
+            <div class="bar-value">13.7%</div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-label">Alberta</div>
+            <div class="bar" data-value="11.7" style="width: 0%" data-color="#f0ad4e"></div>
+            <div class="bar-value">11.7%</div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-label">Manitoba</div>
+            <div class="bar" data-value="3.6" style="width: 0%" data-color="#428bca"></div>
+            <div class="bar-value">3.6%</div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-label">Saskatchewan</div>
+            <div class="bar" data-value="3.1" style="width: 0%" data-color="#563d7c"></div>
+            <div class="bar-value">3.1%</div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-label">Nova Scotia</div>
+            <div class="bar" data-value="2.6" style="width: 0%" data-color="#d9534f"></div>
+            <div class="bar-value">2.6%</div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-label">Outros</div>
+            <div class="bar" data-value="3.8" style="width: 0%" data-color="#777"></div>
+            <div class="bar-value">3.8%</div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-legend">
+        <p><i class="fas fa-info-circle"></i> Fonte: Statistics Canada (2023)</p>
+      </div>
+    </div>
+    
+    <!-- Mapa de densidade populacional -->
+    <div class="chart-container">
+      <h3>Densidade Populacional por Região</h3>
+      <div class="density-map">
+        <div class="density-item">
+          <div class="density-region">Sul de Ontário</div>
+          <div class="density-bar-container">
+            <div class="density-bar" style="width: 95%"></div>
+          </div>
+          <div class="density-value">95 hab/km²</div>
+        </div>
+        <div class="density-item">
+          <div class="density-region">Quebec (Sul)</div>
+          <div class="density-bar-container">
+            <div class="density-bar" style="width: 65%"></div>
+          </div>
+          <div class="density-value">65 hab/km²</div>
+        </div>
+        <div class="density-item">
+          <div class="density-region">Colúmbia Brit. (Sul)</div>
+          <div class="density-bar-container">
+            <div class="density-bar" style="width: 55%"></div>
+          </div>
+          <div class="density-value">55 hab/km²</div>
+        </div>
+        <div class="density-item">
+          <div class="density-region">Regiões Centrais</div>
+          <div class="density-bar-container">
+            <div class="density-bar" style="width: 25%"></div>
+          </div>
+          <div class="density-value">25 hab/km²</div>
+        </div>
+        <div class="density-item">
+          <div class="density-region">Norte do Canadá</div>
+          <div class="density-bar-container">
+            <div class="density-bar" style="width: 5%"></div>
+          </div>
+          <div class="density-value">0,03 hab/km²</div>
+        </div>
+      </div>
+    </div>
+    
+    <style>
+      .chart-container {
+        background-color: var(--light);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .chart-container h3 {
+        color: var(--dark);
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 0.5rem;
+      }
+      
+      .chart-bars {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      
+      .bar-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .bar-label {
+        width: 120px;
+        font-weight: 600;
+        text-align: right;
+      }
+      
+      .bar {
+        height: 30px;
+        border-radius: 4px;
+        transition: width 1.5s ease-in-out;
+        position: relative;
+        background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.4) 100%);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+      }
+      
+      .bar-value {
+        width: 60px;
+        font-weight: 600;
+        color: var(--dark);
+      }
+      
+      .chart-legend {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #666;
+        text-align: center;
+      }
+      
+      .chart-legend i {
+        color: var(--primary);
+      }
+      
+      /* Estilo para o mapa de densidade */
+      .density-map {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      
+      .density-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .density-region {
+        width: 150px;
+        font-weight: 600;
+      }
+      
+      .density-bar-container {
+        flex-grow: 1;
+        height: 20px;
+        background-color: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      
+      .density-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary), #ff6b6b);
+        border-radius: 10px;
+        transition: width 1s ease-in-out;
+      }
+      
+      .density-value {
+        width: 80px;
+        font-weight: 600;
+        color: var(--dark);
+      }
+      
+      @media (max-width: 768px) {
+        .bar-container, .density-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.3rem;
+        }
+        
+        .bar-label, .density-region {
+          width: 100%;
+          text-align: left;
+        }
+        
+        .bar-value, .density-value {
+          width: 100%;
+          text-align: left;
+        }
+        
+        .bar {
+          width: 100% !important;
+        }
+      }
+    </style>
+    
+    <script>
+      // Animação dos gráficos quando a seção é visualizada
+      document.addEventListener('DOMContentLoaded', function() {
+        const mathSection = document.getElementById('matematica');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // Animar barras do gráfico de distribuição
+              const bars = document.querySelectorAll('.bar');
+              bars.forEach(bar => {
+                const value = bar.getAttribute('data-value');
+                const color = bar.getAttribute('data-color');
+                bar.style.width = value + '%';
+                bar.style.backgroundColor = color;
+              });
+              
+              // Animar barras de densidade
+              const densityBars = document.querySelectorAll('.density-bar');
+              densityBars.forEach(bar => {
+                // A largura já está definida no estilo inline
+                // Apenas ativar a transição
+                bar.style.transition = 'width 1.5s ease-in-out';
+              });
+            }
+          });
+        }, { threshold: 0.3 });
+        
+        observer.observe(mathSection);
+      });
+    </script>
+  </section>
+  <!-- Ciências -->
+  <section id="ciencias" class="fade-in">
+    <h2><i class="fas fa-flask"></i> Ciências</h2>
+    <p>O Canadá possui uma biodiversidade impressionante, com ecossistemas que variam da tundra ártica às florestas temperadas. O país também é rico em recursos naturais, incluindo minerais, madeira e energia hidrelétrica.</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-tree"></i> Florestas Boreais</h3>
+        <p>A floresta boreal canadense é uma das maiores florestas intactas do mundo, crucial para o equilíbrio climático global.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-bolt"></i> Energia Limpa</h3>
+        <p>O Canadá é um dos maiores produtores de energia hidrelétrica do mundo, com cerca de 60% de sua eletricidade vindo dessa fonte.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-dna"></i> Pesquisa Científica</h3>
+        <p>O país investe fortemente em pesquisa médica, ciências ambientais e tecnologia limpa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artes -->
+  <section id="artes" class="fade-in">
+    <h2><i class="fas fa-palette"></i> Artes</h2>
+    <p>A cena artística canadense é vibrante e diversificada, refletindo o multiculturalismo do país. Do Grupo dos Sete, que capturou a beleza das paisagens canadenses, aos artistas contemporâneos que exploram questões de identidade e diversidade.</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-theater-masks"></i> Cinema</h3>
+        <p>O Festival Internacional de Cinema de Toronto é um dos mais importantes do mundo, e diretores como David Cronenberg e Denis Villeneuve são aclamados internacionalmente.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-music"></i> Música</h3>
+        <p>Artistas como Leonard Cohen, Joni Mitchell, Drake e The Weeknd alcançaram fama mundial, representando diferentes gerações e estilos musicais.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-monument"></i> Arte Indígena</h3>
+        <p>Totens, esculturas inuit e arte contemporânea indígena são componentes essenciais da identidade cultural canadense.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educação Física -->
+  <section id="ed-fisica" class="fade-in">
+    <h2><i class="fas fa-running"></i> Educação Física</h2>
+    <p>Os canadenses são entusiastas de atividades ao ar livre e esportes, com o hóquei no gelo sendo considerado o esporte nacional. O país também se destaca em competições internacionais como os Jogos Olímpicos.</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-hockey-puck"></i> Hóquei no Gelo</h3>
+        <p>Esporte mais popular do país, com a NHL contando com sete times canadenses e jogadores icônicos como Wayne Gretzky.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-skiing"></i> Esportes de Inverno</h3>
+        <p>Esqui, snowboard, patinação no gelo e curling são atividades populares durante os longos invernos canadenses.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-medal"></i> Olimpíadas</h3>
+        <p>O Canadá sediou os Jogos Olímpicos em Montreal (1976), Calgary (1988) e Vancouver (2010), demonstrando excelência organizacional.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inglês -->
+  <section id="ingles" class="fade-in">
+    <h2><i class="fas fa-language"></i> Inglês</h2>
+    <p>O inglês canadense tem características únicas, influenciadas pelo francês e pelo inglês britânico e americano. O país também possui um vocabulário distinto, com palavras como "loonie" (moeda de um dólar) e "toque" (boné de inverno).</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-comments"></i> Pronúncia Canadense</h3>
+        <p>Conhecida pelo "Canadian raising", onde ditongos como /aɪ/ e /aʊ/ são pronunciados de forma diferente antes de consoantes surdas.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-exchange-alt"></i> Influências Linguísticas</h3>
+        <p>Palavras de origem francesa como "poutine" e "tuque" foram incorporadas ao vocabulário canadense.</p>
+      </div>
+    </div>
+    
+    <div class="quiz-container">
+      <h3>Quiz: Inglês Canadense</h3>
+      <div class="quiz-question">Qual é o significado da palavra canadense "loonie"?</div>
+      <div class="quiz-options">
+        <div class="quiz-option">a) Uma pessoa excêntrica</div>
+        <div class="quiz-option">b) A moeda de um dólar canadense</div>
+        <div class="quiz-option">c) Um pássaro típico do Canadá</div>
+        <div class="quiz-option">d) Um tipo de comida</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filosofia -->
+  <section id="filosofia" class="fade-in">
+    <h2><i class="fas fa-brain"></i> Filosofia/Sociologia</h2>
+    <p>A sociedade canadense é fundamentada em valores como multiculturalismo, tolerância e igualdade. O conceito de "mosaic" (mosaico) contrasta com o "melting pot" americano, enfatizando a preservação das identidades culturais dentro de uma sociedade coesa.</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-hands-helping"></i> Multiculturalismo</h3>
+        <p>Política oficial desde 1971, o Canadá promove ativamente a diversidade cultural como força nacional.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-balance-scale"></i> Justiça Social</h3>
+        <p>Sistema de saúde universal, programas de bem-estar social e proteção dos direitos humanos são pilares da sociedade canadense.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-handshake"></i> Reconciliação</h3>
+        <p>Esforços contínuos para abordar o legado de escolas residenciais indígenas e promover a reconciliação com os povos originários.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Economia -->
+  <section id="economia" class="fade-in">
+    <h2><i class="fas fa-chart-bar"></i> Economia</h2>
+    <p>O Canadá possui uma das economias mais estáveis e desenvolvidas do mundo, com um PIB que o coloca entre as 10 maiores economias globais. O país tem uma economia mista, combinando empresas privadas com regulamentação governamental e programas sociais abrangentes.</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-industry"></i> Setores Principais</h3>
+        <p>Recursos naturais (petróleo, gás, mineração), manufatura, tecnologia e serviços são os pilares da economia canadense.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-hand-holding-usd"></i> Comércio Internacional</h3>
+        <p>Os EUA são o principal parceiro comercial, com o acordo USMCA regulamentando as relações comerciais na América do Norte.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-university"></i> Sistema Financeiro</h3>
+        <p>Dólar canadense é a moeda nacional, e o sistema bancário do país é considerado um dos mais estáveis do mundo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tecnologia -->
+  <section id="tecnologia" class="fade-in">
+    <h2><i class="fas fa-laptop-code"></i> Tecnologia</h2>
+    <p>O Canadá é um líder global em pesquisa e desenvolvimento tecnológico, com destaque para inteligência artificial, biotecnologia, tecnologia limpa e setor aeroespacial. Cidades como Toronto, Vancouver e Montreal são centros de inovação reconhecidos internacionalmente.</p>
+    
+    <div class="card-container">
+      <div class="card">
+        <h3><i class="fas fa-robot"></i> Inteligência Artificial</h3>
+        <p>O Canadá é pioneiro em IA, com pesquisadores como Geoffrey Hinton (conhecido como "o padrinho da IA") liderando avanços no campo.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-satellite"></i> Setor Aeroespacial</h3>
+        <p>O Canadá contribui para a Estação Espacial Internacional com o Canadarm, um braço robótico avançado.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-mobile-alt"></i> Tecnologia Limpa</h3>
+        <p>Empresas canadenses são líderes em soluções de energia renovável, gestão de resíduos e tecnologias ambientais.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>Desenvolvido por [Seu Nome] | Expedição Interdisciplinar - Canadá © 2023</p>
+    <p>Créditos: imagens de Unsplash e domínio público.</p>
+  </footer>
+
+  <script>
+    // Script para funcionalidades interativas
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fechar menu ao clicar em um link
+      const navLinks = document.querySelectorAll('.nav-menu a');
+      const menuCheckbox = document.getElementById('check');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          menuCheckbox.checked = false;
+        });
+      });
+      
+      // Suavizar rolagem para âncoras
+      document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        });
+      });
+      
+      // Quiz interativo
+      const quizOptions = document.querySelectorAll('.quiz-option');
+      quizOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove qualquer seleção anterior
+          quizOptions.forEach(opt => opt.style.backgroundColor = '');
+          
+          // Destaca a opção selecionada
+          this.style.backgroundColor = '#e0f7fa';
+          
+          // Verifica se é a resposta correta
+          if (this.textContent.includes('b) A moeda de um dólar canadense')) {
+            this.style.backgroundColor = '#c8e6c9';
+          } else {
+            this.style.backgroundColor = '#ffcdd2';
+          }
+        });
+      });
+      
+      // Animação para elementos ao rolar
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElements.forEach(element => {
+        element.style.opacity = 0;
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(element);
+      });
+    });
+  </script>
+</body>
+</html>
